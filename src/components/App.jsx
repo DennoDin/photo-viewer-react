@@ -28,18 +28,32 @@ export default class App extends Component {
     console.log("clicked here");
   };
 
+  uploadPic = (file) => {
+    let arrayPhotos = [];
+    console.log(this.state.photos.length);
+    arrayPhotos = [...this.state.photos];
+    const newPhoto = saveObject(file);
+    newPhoto.then((pic) => {
+      arrayPhotos = [...arrayPhotos, pic];
+      this.setState({ photos: arrayPhotos });
+      console.log(this.state.photos.length);
+    });
+  };
+
   render() {
     //TODO set conditions later
     if (this.state.currentView === "AllPhotos") {
       return (
         <div className="app">
-          <Navbar onClick={this.onClick} />put all photos here
+          <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />put all
+          photos here
         </div>
       );
     }
     return (
       <div className="app">
-        <Navbar />put single photos here
+        <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />put single
+        photos here
       </div>
     );
   }
