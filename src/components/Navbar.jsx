@@ -9,6 +9,10 @@ export default class Navbar extends Component {
   }
 
   render() {
-    return <div className="navbar" />;
+    return (
+      <div className="navbar">
+        <button onClick={this.props.onClick}>Title</button>
+      </div>
+    );
   }
 }
