@@ -18,3 +18,9 @@ body {
 .single-photo {
   width: 100%;
 }
+
+.AllPhotos {
+  align-content: space-around;
+  width: 200px;
+  height: 200px;
+}

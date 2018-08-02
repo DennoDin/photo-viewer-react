@@ -8,15 +8,20 @@ export default class Upload extends Component {
     super(props);
   }
 
+  sendFile = (e) => {
+    const file = document.getElementById("file").files[0];
+    this.props.uploadPic(file);
+    e.preventDefault();
+  };
   render() {
     return (
       <div className="file-upload">
         <form>
           <label>
             FILE
-            <input type="file" name="file" />
+            <input type="file" id="file" />
           </label>
-          <button>submit</button>
+          <button onClick={this.sendFile}>submit</button>
         </form>
       </div>
     );
