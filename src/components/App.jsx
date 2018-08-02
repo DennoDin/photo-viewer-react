@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
 import SinglePhoto from "./SinglePhoto";
-import { listObjects, getSingleObject, saveObject } from "../utils/index";
+import { listObjects, saveObject } from "../utils/index";
 
 import "../styles/styles.css";
 
@@ -30,14 +30,19 @@ export default class App extends Component {
 
   uploadPic = (file) => {
     let arrayPhotos = [];
-    console.log(this.state.photos.length);
     arrayPhotos = [...this.state.photos];
     const newPhoto = saveObject(file);
     newPhoto.then((pic) => {
       arrayPhotos = [...arrayPhotos, pic];
       this.setState({ photos: arrayPhotos });
-      console.log(this.state.photos.length);
     });
+  };
+
+  selectPhoto = (key) => {
+    this.setState = {
+      currentView: key,
+      selectedPhoto: key,
+    };
   };
 
   render() {
@@ -45,15 +50,18 @@ export default class App extends Component {
     if (this.state.currentView === "AllPhotos") {
       return (
         <div className="app">
-          <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />put all
-          photos here
+          <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />
+          <AllPhotos
+            photos={this.state.photos}
+            selectPhoto={this.selectPhoto}
+          />
         </div>
       );
     }
     return (
       <div className="app">
-        <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />put single
-        photos here
+        <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />
+        <SinglePhoto key={this.state.selectedPhoto} />
       </div>
     );
   }
