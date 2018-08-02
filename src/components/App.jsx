@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
-import SinglePhoto from "./SinglePhoto";
+import { SinglePhoto } from "./SinglePhoto";
 import { listObjects, saveObject } from "../utils/index";
 
 import "../styles/styles.css";
@@ -26,6 +26,7 @@ export default class App extends Component {
   onClick = () => {
     this.setState({ currentView: "AllPhotos" });
     console.log("clicked here");
+    console.log(this.state);
   };
 
   uploadPic = (file) => {
@@ -39,10 +40,10 @@ export default class App extends Component {
   };
 
   selectPhoto = (key) => {
-    this.setState = {
-      currentView: key,
-      selectedPhoto: key,
-    };
+    const newKey = key;
+    console.log(`displaying ${newKey}`);
+    this.setState({ currentView: newKey, selectedPhoto: newKey });
+    console.log(this.state);
   };
 
   render() {
@@ -61,7 +62,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />
-        <SinglePhoto key={this.state.selectedPhoto} />
+        <SinglePhoto image={this.state.selectedPhoto} />
       </div>
     );
   }
