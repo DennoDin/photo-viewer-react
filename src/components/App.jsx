@@ -2,50 +2,19 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
 import { SinglePhoto } from "./SinglePhoto";
-import { listObjects, saveObject, getSingleObject } from "../utils/index";
-import _ from "lodash";
-
 import "../styles/styles.css";
+import { listPhotos } from "./redux_state";
+import PhotosLink from "./containers";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentView: "AllPhotos",
-      photos: [],
-      selectedPhoto: undefined,
-    };
   }
 
   componentDidMount() {
-    const photos = listObjects();
-    photos.then((pics) => {
-      this.setState({ photos: [...pics] });
-    });
+    // PhotosLink
+    console.log(PhotosLink);
   }
-
-  onClick = () => {
-    this.setState({ currentView: "AllPhotos" });
-    console.log("clicked here");
-    console.log(this.state);
-  };
-
-  uploadPic = (file) => {
-    let arrayPhotos = [];
-    arrayPhotos = [...this.state.photos];
-    const newPhoto = saveObject(file);
-    newPhoto.then((pic) => {
-      arrayPhotos = [...arrayPhotos, pic];
-      this.setState({ photos: arrayPhotos });
-    });
-  };
-
-  selectPhoto = (key) => {
-    const newKey = key;
-    console.log(`displaying ${newKey}`);
-    this.setState({ currentView: newKey, selectedPhoto: newKey });
-    console.log(this.state);
-  };
 
   render() {
     //TODO set conditions later
