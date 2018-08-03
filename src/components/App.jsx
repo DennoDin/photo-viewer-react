@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
 import { SinglePhoto } from "./SinglePhoto";
-import { listObjects, saveObject } from "../utils/index";
+import { listObjects, saveObject, getSingleObject } from "../utils/index";
+import _ from "lodash";
 
 import "../styles/styles.css";
 
@@ -12,7 +13,7 @@ export default class App extends Component {
     this.state = {
       currentView: "AllPhotos",
       photos: [],
-      selectedPhoto: "",
+      selectedPhoto: undefined,
     };
   }
 
@@ -51,7 +52,7 @@ export default class App extends Component {
     if (this.state.currentView === "AllPhotos") {
       return (
         <div className="app">
-          <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />
+          <Navbar goHome={this.onClick} getPhotos={this.uploadPic} />
           <AllPhotos
             photos={this.state.photos}
             selectPhoto={this.selectPhoto}
@@ -61,7 +62,7 @@ export default class App extends Component {
     }
     return (
       <div className="app">
-        <Navbar onClick={this.onClick} uploadPic={this.uploadPic} />
+        <Navbar goHome={this.onClick} getPhotos={this.uploadPic} />
         <SinglePhoto image={this.state.selectedPhoto} />
       </div>
     );

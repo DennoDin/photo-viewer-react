@@ -1,4 +1,5 @@
 import React from "react";
+import * as _ from "lodash";
 
 export const SinglePhoto = (props) => {
   // console.log(`props inside SinglePhoto ${props}`);
