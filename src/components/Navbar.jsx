@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Upload from "./Upload";
-import _ from "lodash";
+import { connect } from "react-redux";
+import { listPhotos, uploader, goHome, selectPhoto } from "../redux_state";
 
 import "../styles/navbar.css";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,3 +19,24 @@ export default class Navbar extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currentView: state.currentView,
+    photos: state.photos,
+    selectedPhoto: state.selectedPhoto,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    goHome: () => {
+      dispatch(goHome());
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar);

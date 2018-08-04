@@ -1,6 +1,7 @@
-import redux from "react-redux";
+import redux from "redux";
 import thunk from "redux-thunk";
-import { listObjects, saveObject, getSingleObject } from "../utils/index";
+import { createStore, applyMiddleware } from "redux";
+import { listObjects, saveObject, getSingleObject } from "./utils/index";
 
 const initialState = {
   currentView: "AllPhotos",
@@ -43,7 +44,7 @@ export const selectPhoto = (key) => {
 
 // Async functions
 export const listPhotos = () => {
-  return (dispatch) => {
+  return function(dispatch) {
     return listObjects().then((photos) => {
       dispatch(getAllPhotos(photos));
     });
@@ -60,8 +61,6 @@ export const uploader = (file) => {
 /////////////////////
 //     REDUCER     //
 /////////////////////
-
-//1 reducer
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_ALL_PHOTOS": {
@@ -95,4 +94,4 @@ export const reducer = (state = initialState, action) => {
   return state;
 };
 
-export default reducer;
+export const store = createStore(reducer, applyMiddleware(thunk));

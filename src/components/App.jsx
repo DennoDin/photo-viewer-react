@@ -3,37 +3,56 @@ import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
 import { SinglePhoto } from "./SinglePhoto";
 import "../styles/styles.css";
-import { listPhotos } from "./redux_state";
-import PhotosLink from "./containers";
+import { connect } from "react-redux";
+import { listPhotos, uploader, goHome, selectPhoto } from "../redux_state";
+// import { PhotosLink } from "../containers";
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    // PhotosLink
-    console.log(PhotosLink);
+    // send request for photos from aws
+    this.props.listAllPhotos();
   }
 
   render() {
     //TODO set conditions later
-    if (this.state.currentView === "AllPhotos") {
+    if (this.props.currentView === "AllPhotos") {
       return (
         <div className="app">
-          <Navbar goHome={this.onClick} getPhotos={this.uploadPic} />
-          <AllPhotos
-            photos={this.state.photos}
-            selectPhoto={this.selectPhoto}
-          />
+          <Navbar />
+          <AllPhotos />
         </div>
       );
     }
     return (
       <div className="app">
-        <Navbar goHome={this.onClick} getPhotos={this.uploadPic} />
-        <SinglePhoto image={this.state.selectedPhoto} />
+        <Navbar />
+        <SinglePhoto />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currentView: state.currentView,
+    photos: state.photos,
+    selectedPhoto: state.selectedPhoto,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    listAllPhotos: () => {
+      dispatch(listPhotos());
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

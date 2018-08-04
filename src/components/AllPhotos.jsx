@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import _ from "lodash";
+import { connect } from "react-redux";
+import { listPhotos, uploader, goHome, selectPhoto } from "../redux_state";
 
-export default class AllPhotos extends Component {
+class AllPhotos extends Component {
   constructor(props) {
     super(props);
   }
@@ -9,7 +10,8 @@ export default class AllPhotos extends Component {
   selectedPhoto = (e) => {
     const key = e.target.alt;
     console.log(key);
-    this.props.selectPhoto(key);
+    // this.props.selectPhoto(key);
+    this.props.selectPhoto();
   };
 
   render() {
@@ -26,3 +28,24 @@ export default class AllPhotos extends Component {
     });
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currentView: state.currentView,
+    photos: state.photos,
+    selectedPhoto: state.selectedPhoto,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectPhoto: () => {
+      dispatch(selectPhoto());
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AllPhotos);
