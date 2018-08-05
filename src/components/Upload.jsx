@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import _ from "lodash";
+import { connect } from "react-redux";
+import { uploader } from "../redux_state";
 
 import "../styles/upload.css";
 
-export default class Upload extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+class Upload extends Component {
   sendFile = (e) => {
     const file = document.getElementById("file").files[0];
-    this.props.uploadPic(file);
+    this.props.uploadPhoto(file);
     e.preventDefault();
   };
   render() {
@@ -27,3 +24,24 @@ export default class Upload extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currentView: state.currentView,
+    photos: state.photos,
+    selectedPhoto: state.selectedPhoto,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    uploadPhoto: (file) => {
+      dispatch(uploader(file));
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Upload);

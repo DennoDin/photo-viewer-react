@@ -1,6 +1,5 @@
-import redux from "redux";
-import thunk from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import { listObjects, saveObject, getSingleObject } from "./utils/index";
 
 const initialState = {
@@ -53,6 +52,7 @@ export const listPhotos = () => {
 
 export const uploader = (file) => {
   return (dispatch) => {
+    if (!file) return;
     return saveObject(file).then((saved) => {
       dispatch(uploadPic(saved));
     });

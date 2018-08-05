@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
-import { SinglePhoto } from "./SinglePhoto";
+import SinglePhoto from "./SinglePhoto";
 import "../styles/styles.css";
 import { connect } from "react-redux";
-import { listPhotos, uploader, goHome, selectPhoto } from "../redux_state";
-// import { PhotosLink } from "../containers";
+import { listPhotos } from "../redux_state";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     // send request for photos from aws
     this.props.listAllPhotos();

@@ -1,29 +1,37 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { listPhotos, uploader, goHome, selectPhoto } from "../redux_state";
+import { selectPhoto } from "../redux_state";
 
 class AllPhotos extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   selectedPhoto = (e) => {
-    const key = e.target.alt;
+    console.log(e.target);
+    let key;
+    if (e.target.firstChild) {
+      console.log(e.target.firstChild.alt);
+      key = e.target.firstChild.alt;
+    } else {
+      key = e.target.alt;
+    }
     console.log(key);
-    // this.props.selectPhoto(key);
-    this.props.selectPhoto();
+    this.props.selectPhoto(key);
   };
 
   render() {
-    return this.props.photos.map((photo) => {
+    return this.props.photos.map((photo, i) => {
       return (
-        <img
-          className="AllPhotos"
+        <span
           key={photo.Key}
-          src={"http://react.sprint.s3.amazonaws.com/" + photo.Key}
-          alt={photo.Key}
           onClick={this.selectedPhoto}
-        />
+          onKeyDown={this.selectedPhoto}
+          tabIndex={i}
+          role="button"
+        >
+          <img
+            className="AllPhotos"
+            src={`http://react.sprint.s3.amazonaws.com/${photo.Key}`}
+            alt={photo.Key}
+          />
+        </span>
       );
     });
   }
@@ -39,8 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectPhoto: () => {
-      dispatch(selectPhoto());
+    selectPhoto: (key) => {
+      dispatch(selectPhoto(key));
     },
   };
 };

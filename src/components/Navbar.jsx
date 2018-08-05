@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import Upload from "./Upload";
 import { connect } from "react-redux";
-import { listPhotos, uploader, goHome, selectPhoto } from "../redux_state";
+import { goHome } from "../redux_state";
 
 import "../styles/navbar.css";
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="navbar">
