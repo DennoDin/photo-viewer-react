@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { listObjects, saveObject, getSingleObject } from "./utils/index";
+import { listObjects, saveObject } from "./utils/index";
 
 const initialState = {
   currentView: "AllPhotos",

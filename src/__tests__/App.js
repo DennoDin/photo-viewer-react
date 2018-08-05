@@ -1,25 +1,24 @@
 jest.mock("../utils/");
 
-import { configure } from "enzyme";
+import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
 
 import React from "react";
-import { mount } from "enzyme";
 import sinon from "sinon";
 
 import App from "../components/App";
-import { listObjects, getSingleObject } from "../utils/";
+// import { listObjects, getSingleObject } from "../utils/";
 
 import AllPhotos from "../components/AllPhotos";
 import Navbar from "../components/Navbar";
 import SinglePhoto from "../components/SinglePhoto";
 
 describe("The App component", () => {
-  let componentDidMountSpy;
-  let getSingleObjectSpy;
-  let listObjectsSpy;
+  // let componentDidMountSpy;
+  // let getSingleObjectSpy;
+  // let listObjectsSpy;
   let wrapper;
 
   beforeEach(() => {

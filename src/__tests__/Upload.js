@@ -1,6 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
-import _ from "lodash";
+// import _ from "lodash";
 
 import Upload from "../components/Upload";
 

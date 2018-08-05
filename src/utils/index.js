@@ -16,10 +16,10 @@ const bucket = new AWS.S3({
   },
 });
 
-const textDecoder = new TextDecoder("utf8");
+// const textDecoder = new TextDecoder("utf8");
 
 export function listObjects() {
-  const listObjects = new Promise((resolve, reject) => {
+  const listObjects = new Promise((resolve) => {
     bucket.listObjects((error, data) => {
       if (error) {
         console.error("error: ", error);
@@ -34,7 +34,7 @@ export function listObjects() {
 }
 
 export function getSingleObject(key) {
-  const getSingleObject = new Promise((resolve, reject) => {
+  const getSingleObject = new Promise((resolve) => {
     bucket.getObject(
       {
         Bucket: bucketName,
@@ -55,7 +55,7 @@ export function getSingleObject(key) {
 }
 
 export function saveObject(file) {
-  const saveObject = new Promise((resolve, reject) => {
+  const saveObject = new Promise((resolve) => {
     bucket.putObject(
       {
         Key: file.name,

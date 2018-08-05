@@ -10,7 +10,7 @@ const photos = {
 };
 
 export function listObjects() {
-  const listObjects = new Promise((resolve, reject) => {
+  const listObjects = new Promise((resolve) => {
     resolve(photos.Contents);
   });
 
@@ -25,7 +25,7 @@ export function getSingleObject(key) {
   return getSingleObject;
 }
 
-export function saveObject(file) {
+export function saveObject() {
   const saveObject = new Promise((resolve) => {
     resolve("TestReturnString");
   });

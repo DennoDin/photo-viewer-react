@@ -4,7 +4,7 @@ import React from "react";
 import { mount } from "enzyme";
 import sinon from "sinon";
 
-import { saveObject } from "../utils/";
+// import { saveObject } from "../utils/";
 
 import Navbar from "../components/Navbar";
 import Upload from "../components/Upload";
@@ -48,7 +48,7 @@ describe("The Navbar component", () => {
   });
 
   it("invokes the getPhotos callback given to it as a prop when the receiveFiles callback of the Upload component is invoked", () => {
-    spyOn(Navbar.prototype, "receiveFiles");
+    // spyOn(Navbar.prototype, "receiveFiles");
     wrapper = mount(
       <Navbar
         getPhotos={() => mockGetPhotosFunction()}

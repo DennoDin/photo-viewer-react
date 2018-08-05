@@ -14,7 +14,7 @@ class Upload extends Component {
     return (
       <div className="file-upload">
         <form>
-          <label>
+          <label htmlFor="file">
             FILE
             <input type="file" id="file" />
           </label>
